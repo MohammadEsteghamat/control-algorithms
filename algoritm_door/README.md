@@ -45,25 +45,25 @@ g(x) = (A - y_1) \left( \frac{1}{1 + e^{-kx}} -
 
  
 ```math
-f\left(x\right)\ =\left\{x\ge0:\frac{\left(A-y_{1}\right)}{1+e^{-kx}}\right\}
+f\left(x\right)\ = \left\{x\ge0:\frac{\left(A-y_{1}\right)}{1+e^{-kx}}\right\}
  ```
 
 
  
 ```math
-f_{1}\left(x\right)\ =\ \left\{x\ge0:-\frac{\left(A-y_{1}\right)}{1+e^{-k(x-b)}}\right\}
+f_{1}\left(x\right)\ = \ \left\{x\ge0:-\frac{\left(A-y_{1}\right)}{1+e^{-k(x-b)}}\right\}
  ```
 
 
  
 ```math
-f_{2}\left(x\right)\ =\left\{x\ge0:\left(y_{2}-y_{1}\right)\left(\frac{1}{1+e^{-k(x-b)}}\right)\right\}
+f_{2}\left(x\right)\ = \left\{x\ge0:\left(y_{2}-y_{1}\right)\left(\frac{1}{1+e^{-k(x-b)}}\right)\right\}
  ```
 
 
  
 ```math
-f_{3}\left(x\right)\ =\left\{x\ge0:\ y_{1}\right\}
+f_{3}\left(x\right)\ = \left\{x\ge0:\ y_{1}\right\}
  ```
 
 ترکیب آنها:  
@@ -76,25 +76,25 @@ g(x) = f(x) + f_1(x) + f_2(x) + f_3(x)
 ## 🟥 Antiderivatives (Integrals)
 
 ```math
-F\left(x\right)=\frac{\left(A-y_{1}\right)}{k}\ln\left(1+e^{kx}\right)-1.75480298876
+F\left(x\right) = \frac{\left(A-y_{1}\right)}{k}\ln\left(1+e^{kx}\right)-1.75480298876
  ```
 
 
  
 ```math
-F_{1}\left(x\right)=-\frac{A-y_{1}}{k}\ln\left(1+e^{k\left(x-b\right)}\right)
+F_{1}\left(x\right) = -\frac{A-y_{1}}{k}\ln\left(1+e^{k\left(x-b\right)}\right)
 
  ```
 
  
 ```math
-F_{2}\left(x\right)=\frac{y_{2}-y_{1}}{k}\ln\left(1+e^{k\left(x-b\right)}\right)
+F_{2}\left(x\right) = \frac{y_{2}-y_{1}}{k}\ln\left(1+e^{k\left(x-b\right)}\right)
  ```
 
 
  
 ```math
-F_{3}\left(x\right)\ =\ y_{1}x
+F_{3}\left(x\right)\ = \ y_{1}x
  ```
 
 ### **Final Integrated Model: F₄(x)**
