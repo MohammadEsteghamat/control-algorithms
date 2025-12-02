@@ -91,6 +91,27 @@ double trapezoidalIntegral(double a, double b, int n, Parameters *p){
 
     return result * h;  
 }
+double simpsonIntegral(double a, double b, int n, Parameters *p) {
+    // Çæá ˜ ˜ä n ÒæÌå!
+    if (n % 2 == 1) {
+        n++;  // íÇ ãíÊæäí ÇÑæÑ ÈÏí¡ íÇ ÎæÏÊ íå Ïæäå ÇÖÇİå ˜ä
+        // ÈåÊÑå ÊÇÈÚ caller Ñæ ãÌÈæÑ ˜äí n ÒæÌ ÈÏå
+    }
+    
+    double h = (b - a) / n;
+    double sum = g(a, p) + g(b, p);  // x0 æ xn ? ÖÑíÈ 1
+    int i;
+    for(i = 1; i < n; i++) {
+        double x = a + i * h;
+        if(i % 2 == 1) {
+            sum += 4 * g(x, p);    // äŞÇØ İÑÏ ? 4
+        } else {
+            sum += 2 * g(x, p);    // äŞÇØ ÒæÌ ? 2
+        }
+    }
+    
+    return (h / 3.0) * sum;
+}
 //void find_end_point(Parameters*p,double target_value){ 
 //    target_value-=500; 
 //    if(target_value<500)target_value=600;
@@ -134,12 +155,12 @@ Parameters p = {7.2,1,5.4,-2.8,1.6};
 int main(){
 	double  i=-10;
     printf("Door Test Start\n");
-	for( i=0; i < 100 ;i=i+1){
-		p.end_point = i;
-		printf("integral(%2.2f) : %3.11f\n",  i,trapezoidalIntegral(0,i,1000,&p) - integral_g(i,&p));
-	}
+	for( i=0; i < 50 ;i=i+1){
+	
+		printf("integral trapezoidalIntegral(%2.2f) : %3.11f\n",  i,trapezoidalIntegral(0,i,1000,&p));
+		printf("integral simpsonIntegral    (%2.2f) : %3.11f\n",  i,simpsonIntegral(0,i,1000,&p));
    
-
+}
     return 0;
 }
 
