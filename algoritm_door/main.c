@@ -150,6 +150,26 @@ void find_end_point(Parameters*p,double target){
 	} 
 }
 
+/**
+ * ˜ÇáíÈÑÇÓíæä ÎæÏ˜ÇÑ ÏÑÈ ÈÑ ÇÓÇÓ ãíÇäíä 20 ÍÑ˜Ê ÂÎÑ
+ * Çíä ÊÇÈÚ ÈÇÚË ãíÔå ÏÑÈ åãíÔå ÏÞíÞ Èãæäå — ÍÊí ÈÚÏ ÇÒ 1000 ÈÇÑ ÈÇÒ æ ÈÓÊå ÔÏä!
+ */
+void auto_calibrate_door(Door *door)
+{
+    if (door->integral_history_index < 20) return;
+
+    double sum = 0.0;
+    int i;
+    for (i = 0; i < 20; ++i) {
+        sum += door->integral_history[i];
+    }
+    double avg_distance_m = sum / 20.0;
+
+
+    set_endpoint(&door->p, avg_distance_m);
+    door->integral_door = avg_distance_m;
+}
+
 Parameters p = {7.2,1,5.4,-2.8,1.6};
 
 int main(){
