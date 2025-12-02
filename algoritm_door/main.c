@@ -75,6 +75,22 @@ double integral_g_endpoint(const Parameters* p) {
 			- 1.11797932348;
 }
 
+double trapezoidalIntegral(double a, double b, int n, Parameters *p){
+
+
+    double h = (b - a) / n;   
+    double sum = 0.0;
+	int i;
+   
+    for(i = 1; i < n; ++i){
+        sum += g(a + i * h, p);
+    }
+
+   
+    double result = (g(a, p) + g(b, p)) / 2.0 + sum;
+
+    return result * h;  
+}
 //void find_end_point(Parameters*p,double target_value){ 
 //    target_value-=500; 
 //    if(target_value<500)target_value=600;
@@ -118,9 +134,9 @@ Parameters p = {7.2,1,5.4,-2.8,1.6};
 int main(){
 	double  i=-10;
     printf("Door Test Start\n");
-	for( i=0; i < 100 ;i=i+10){
+	for( i=0; i < 100 ;i=i+1){
 		p.end_point = i;
-		printf("integral(%2.2f) : %3.11f\n",  i,integral_g_endpoint(&p) );
+		printf("integral(%2.2f) : %3.11f\n",  i,trapezoidalIntegral(0,i,1000,&p) - integral_g(i,&p));
 	}
    
 
