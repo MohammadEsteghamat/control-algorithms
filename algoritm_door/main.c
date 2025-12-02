@@ -6,7 +6,7 @@
 
 
 #define abs_(x) ((x)>0?(x):-(x))
-// 1 < K
+
 // Parameters struct
 typedef struct{
     double maxSpeed;
@@ -51,7 +51,7 @@ double compute_y1(double g_start, const Parameters* p) {
            - 2.0 * (p->y2 - p->maxSpeed) 
            + 2.0 * (p->y2 - p->maxSpeed) * sigmoid(p->k * p->end_point);
 }
-
+// 1 < K 
 double integral_g(double x, const Parameters* p) {
 	if(p->k == 0){
 		return ((p->y2 + p->y1) / 2) * x;	
@@ -74,7 +74,7 @@ double integral_g_endpoint(const Parameters* p) {
     		+ p->y1 * p->end_point
 			- 1.11797932348;
 }
-
+// K < R
 double trapezoidalIntegral(double a, double b, int n, Parameters *p){
 
 
@@ -92,73 +92,74 @@ double trapezoidalIntegral(double a, double b, int n, Parameters *p){
     return result * h;  
 }
 double simpsonIntegral(double a, double b, int n, Parameters *p) {
-    // Çæá ˜ ˜ä n ÒæÌå!
+   
     if (n % 2 == 1) {
-        n++;  // íÇ ãíÊæäí ÇÑæÑ ÈÏí¡ íÇ ÎæÏÊ íå Ïæäå ÇÖÇÝå ˜ä
-        // ÈåÊÑå ÊÇÈÚ caller Ñæ ãÌÈæÑ ˜äí n ÒæÌ ÈÏå
+        n++;  
     }
     
     double h = (b - a) / n;
-    double sum = g(a, p) + g(b, p);  // x0 æ xn ? ÖÑíÈ 1
+    double sum = g(a, p) + g(b, p);  
     int i;
     for(i = 1; i < n; i++) {
         double x = a + i * h;
         if(i % 2 == 1) {
-            sum += 4 * g(x, p);    // äÞÇØ ÝÑÏ ? 4
+            sum += 4 * g(x, p);    
         } else {
-            sum += 2 * g(x, p);    // äÞÇØ ÒæÌ ? 2
+            sum += 2 * g(x, p);   
         }
     }
     
     return (h / 3.0) * sum;
 }
-//void find_end_point(Parameters*p,double target_value){ 
-//    target_value-=500; 
-//    if(target_value<500)target_value=600;
-//    double tolerance=0.1;
-//    p->end_point=1; 
-//    for(int i=0;i<1000;i++){ 
-//    	double integral_now=definite_integral_g(p);
-//        double error=target_value-integral_now;
-//        double dI_db=integral_now/p->end_point;
-//        if(abs_(error)<tolerance)return; 
-//        p->end_point+=error/dI_db;
-//        p->end_time=T_B_RATIO*p->end_point;
-//	} 
-//}
-//
-//void set_end_point(Door*door){ 
-//    double sum=0;
-//    for(int i=0;i<20;i++)
-//    	sum+=door->integral_history[i];
-//    double mean_sum=sum/20; 
-//    find_end_point(&door->p,mean_sum);
-//    door->integral_door=mean_sum; 
-//}
-//
-//int OperateDoor(Door*door,volatile uint32_t*pwm_door,double*dI,bool first){
-//     return 0; 
-//}
-//
-//void door_init(void){ 
-//    door1.p.maxSpeed=999;
-//    door1.p.k=2.5; 
-//    door1.p.end_point=1.4; 
-//    door1.p.y1=-225;
-//    door1.p.y2=300; 
-//    door1.p.end_time=16; 
-//}
 
-// --- END merged content ---
+void find_end_point(Parameters*p,double target){ 
+	const double TOLERANCE = 0.0001;   
+    const int MAX_ITER = 50;
+    double avg_speed = p->maxSpeed * 0.68; 
+    double estimated_time = target / avg_speed;
+    
+    p->end_point = estimated_time * 0.9;
+    if (p->end_point < 0.4) p->end_point = 0.4;
+    if (p->end_point > 100.0) p->end_point = 100.0;
+    
+    int iter;
+    for(iter=0; iter<MAX_ITER; ++iter){ 
+    	double current_distance = integral_g_endpoint(p);
+        double error = target - current_distance;
+        if (fabs(error) < TOLERANCE) break;
+        
+		double h = 0.0002;
+        double saved = p->end_point;
+        p->end_point += h;
+        double dist_plus = integral_g_endpoint(p);
+        double derivative = (dist_plus - current_distance) / h;
+        p->end_point = saved;
+        
+       	double step = error / derivative;
+        
+ 
+        double max_step = 0.18 * fabs(p->end_point ? p->end_point : 1.0);
+        if (fabs(step) > max_step)
+            step = (step > 0) ? max_step : -max_step;
+        
+        p->end_point += step;
+        
+      
+        if (p->end_point < 0.4) p->end_point = 0.4;
+        if (p->end_point > 100.0) p->end_point = 100.0;
+	} 
+}
+
 Parameters p = {7.2,1,5.4,-2.8,1.6};
 
 int main(){
 	double  i=-10;
     printf("Door Test Start\n");
-	for( i=0; i < 50 ;i=i+1){
+	for( i=4; i <= 4 ;i=i+1){
+		p.end_point = 70.000001;
+    	find_end_point(&p,i);
+		printf("integral : (%f) p.end_point : %f integral_g = %f \n\n",  i,p.end_point,integral_g_endpoint(&p));
 	
-		printf("integral trapezoidalIntegral(%2.2f) : %3.11f\n",  i,trapezoidalIntegral(0,i,1000,&p));
-		printf("integral simpsonIntegral    (%2.2f) : %3.11f\n",  i,simpsonIntegral(0,i,1000,&p));
    
 }
     return 0;
