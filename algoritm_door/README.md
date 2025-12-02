@@ -42,10 +42,10 @@ g(x) = (A - y_1) \left( \frac{1}{1 + e^{-kx}} -
 
 | تابع | فرمول |
 
- f(x)  ```math\ ((A-y_1)/(1+e^{-kx})\) ```
- f₁(x) ```math \(- (A-y_1)/(1+e^{-k(x-b)})\) ```
- f₂(x) ```math \((y_2 - y_1)/(1+e^{-k(x-b)})\) ```
- f₃(x) ```math \(y_1\) ```
+ f(x)  ```mathf\left(x\right)\ =\left\{x\ge0:\frac{\left(A-y_{1}\right)}{1+e^{-kx}}\right\} ```
+ f₁(x) ```math ```
+ f₂(x) ```math ```
+ f₃(x) ```math ```
 
 ترکیب آنها:  
 ```math
