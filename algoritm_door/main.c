@@ -18,21 +18,15 @@ typedef struct{
 
 // Door struct
 typedef struct Door {
-    bool isOpening;
-    bool isClosing;
+
     bool state;
-    bool intPhotocellTriggered;
-    volatile bool microSwitch1;
-    volatile bool microSwitch2;
     int integral_door;
     double integral_history[20];
     int integral_history_index;
-    double mande_integral;
-    double rafte_integral;
     Parameters p;
 } Door;
 
-Door door1, door2;
+Door door1;
 
 
 
@@ -150,10 +144,7 @@ void find_end_point(Parameters*p,double target){
 	} 
 }
 
-/**
- * ˜ÇáíÈÑÇÓíæä ÎæÏ˜ÇÑ ÏÑÈ ÈÑ ÇÓÇÓ ãíÇäíä 20 ÍÑ˜Ê ÂÎÑ
- * Çíä ÊÇÈÚ ÈÇÚË ãíÔå ÏÑÈ åãíÔå ÏÞíÞ Èãæäå — ÍÊí ÈÚÏ ÇÒ 1000 ÈÇÑ ÈÇÒ æ ÈÓÊå ÔÏä!
- */
+
 void auto_calibrate_door(Door *door)
 {
     if (door->integral_history_index < 20) return;
@@ -170,18 +161,7 @@ void auto_calibrate_door(Door *door)
     door->integral_door = avg_distance_m;
 }
 
-Parameters p = {7.2,1,5.4,-2.8,1.6};
 
-int main(){
-	double  i=-10;
-    printf("Door Test Start\n");
-	for( i=4; i <= 4 ;i=i+1){
-		p.end_point = 70.000001;
-    	find_end_point(&p,i);
-		printf("integral : (%f) p.end_point : %f integral_g = %f \n\n",  i,p.end_point,integral_g_endpoint(&p));
-	
-   
-}
-    return 0;
-}
+
+
 
