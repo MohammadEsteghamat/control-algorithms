@@ -5,8 +5,8 @@
 
 
 
-
-
+#define abs_(x) ((x)>0?(x):-(x))
+// 1 < K
 // Parameters struct
 typedef struct{
     double maxSpeed;
@@ -14,7 +14,6 @@ typedef struct{
     double end_point;
     double y1;
     double y2;
-    double end_time;
 } Parameters;
 
 // Door struct
@@ -35,8 +34,7 @@ typedef struct Door {
 
 Door door1, door2;
 
-#define T_B_RATIO (5.0/3.0)
-#define abs_(x) ((x)>0?(x):-(x))
+
 
 
 double sigmoid(double z){
@@ -54,6 +52,28 @@ double compute_y1(double g_start, const Parameters* p) {
            + 2.0 * (p->y2 - p->maxSpeed) * sigmoid(p->k * p->end_point);
 }
 
+double integral_g(double x, const Parameters* p) {
+	if(p->k == 0){
+		return ((p->y2 + p->y1) / 2) * x;	
+	}
+    return  ((p->maxSpeed - p->y1) / p->k) * log(1 + exp( p->k * x))
+    		- ((p->maxSpeed - p->y1) / p->k) * log(1 + exp(p->k * (x - p->end_point)))
+    		+ ((p->y2 - p->y1) / p->k) * log(1+ exp(p->k * (x - p->end_point)))
+    		+ p->y1 * x
+			- 1.11797932348;
+}
+
+double integral_g_endpoint(const Parameters* p) {
+	if(p->k == 0){
+		return ((p->y2 + p->y1) / 2) * p->end_point;	
+	}
+	
+    return  ((p->maxSpeed - p->y1) / p->k) * log(1 + exp( p->k * p->end_point))
+    		- ((p->maxSpeed - p->y1) / p->k) * log(2)
+    		+ ((p->y2 - p->y1) / p->k) * log(2)
+    		+ p->y1 * p->end_point
+			- 1.11797932348;
+}
 
 //void find_end_point(Parameters*p,double target_value){ 
 //    target_value-=500; 
@@ -93,15 +113,14 @@ double compute_y1(double g_start, const Parameters* p) {
 //}
 
 // --- END merged content ---
-Parameters p = {7.2,6.2,5.4,-2.8,1.6,10};
+Parameters p = {7.2,1,5.4,-2.8,1.6};
 
 int main(){
 	double  i=-10;
     printf("Door Test Start\n");
-	for( i=0; i < 10 ;i=i+0.01){
+	for( i=0; i < 100 ;i=i+10){
 		p.end_point = i;
-		printf("t : %2.2f   Final entegral: %f\n", i,i);
-	
+		printf("integral(%2.2f) : %3.11f\n",  i,integral_g_endpoint(&p) );
 	}
    
 
