@@ -1,36 +1,5 @@
-#include <stdbool.h>
+#include "door_control.h"
 #include <math.h>
-#include <stdint.h>
-#include <stdio.h>
-
-
-
-#define abs_(x) ((x)>0?(x):-(x))
-
-// Parameters struct
-typedef struct{
-    double maxSpeed;
-    double k;
-    double end_point;
-    double y1;
-    double y2;
-} Parameters;
-
-// Door struct
-typedef struct Door {
-
-    bool state;
-    int integral_door;
-    double integral_history[20];
-    int integral_history_index;
-    Parameters p;
-} Door;
-
-Door door1;
-
-
-
-
 double sigmoid(double z){
 	 return 1 / (1 + exp(-z));
 }
@@ -108,7 +77,7 @@ double simpsonIntegral(double a, double b, int n, Parameters *p) {
 
 void find_end_point(Parameters*p,double target){ 
 	const double TOLERANCE = 0.0001;   
-    const int MAX_ITER = 50;
+    const int8_t MAX_ITER = 50;
     double avg_speed = p->maxSpeed * 0.68; 
     double estimated_time = target / avg_speed;
     
@@ -116,7 +85,7 @@ void find_end_point(Parameters*p,double target){
     if (p->end_point < 0.4) p->end_point = 0.4;
     if (p->end_point > 100.0) p->end_point = 100.0;
     
-    int iter;
+    int8_t iter;
     for(iter=0; iter<MAX_ITER; ++iter){ 
     	double current_distance = integral_g_endpoint(p);
         double error = target - current_distance;
@@ -150,7 +119,7 @@ void auto_calibrate_door(Door *door)
     if (door->integral_history_index < 20) return;
 
     double sum = 0.0;
-    int i;
+    int8_t i;
     for (i = 0; i < 20; ++i) {
         sum += door->integral_history[i];
     }
