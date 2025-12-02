@@ -32,10 +32,7 @@
 ## 🟦 Main Function: **g(x)**
 
 ```math
-g(x) = (A - y_1) \left( \frac{1}{1 + e^{-kx}} - 
-\frac{1}{1 + e^{-k(x-b)}} \right) +
-(y_2 - y_1) \frac{1}{1 + e^{-k(x-b)}} + y_1
-\quad (x \ge 0)
+g\left(x\right)\ =\ \left\{x\ge0:\left(A-y_{1}\right)*\left(\frac{1}{1+e^{-kx}}-\frac{1}{1+e^{-k(x-b)}}\right)+\left(y_{2}-y_{1}\right)\left(\frac{1}{1+e^{-k(x-b)}}\right)+y_{1}\right\}
 ```
 
 این تابع چهار مؤلفه اصلی دارد:
