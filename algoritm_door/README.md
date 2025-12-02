@@ -43,19 +43,19 @@ g(x) = (A - y_1) \left( \frac{1}{1 + e^{-kx}} -
 
 
  f(x)  
- ```math
+```math
 f\left(x\right)\ =\left\{x\ge0:\frac{\left(A-y_{1}\right)}{1+e^{-kx}}\right\}
  ```
  f₁(x)
- ```math
+```math
 f_{1}\left(x\right)\ =\ \left\{x\ge0:-\frac{\left(A-y_{1}\right)}{1+e^{-k(x-b)}}\right\}
  ```
  f₂(x) 
- ```math
+```math
 f_{2}\left(x\right)\ =\left\{x\ge0:\left(y_{2}-y_{1}\right)\left(\frac{1}{1+e^{-k(x-b)}}\right)\right\}
  ```
  f₃(x) 
- ```math
+```math
 f_{3}\left(x\right)\ =\left\{x\ge0:\ y_{1}\right\}
  ```
 
