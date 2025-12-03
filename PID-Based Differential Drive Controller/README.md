@@ -17,9 +17,13 @@ The animation of the robot movement and error plots are also generated.
 * Error plotting for analysis
 
 ---
-## 🎥 Demo Video
 
-[Click here to watch the simulation video](https://github.com/USERNAME/REPO_NAME/blob/main/demo.mp4)
+
+## 🎥 Simulation Demo
+
+![Robot Simulation Demo]([demo.gif](https://github.com/MohammadEsteghamat/control-algorithms/blob/main/PID-Based%20Differential%20Drive%20Controller/Videos/squre.gif))
+
+---
 
 ## 📁 Code Structure
 
