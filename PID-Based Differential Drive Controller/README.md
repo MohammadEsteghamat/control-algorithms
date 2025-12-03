@@ -57,11 +57,9 @@ Draws:
 ---
 
 ## 🧮 Robot Kinematics
-
-\[
-v = \frac{v_r + v_l}{2}
-\]
-
+```math
+\[v = \frac{v_r + v_l}{2}\]
+```
 \[
 \omega = \frac{v_r - v_l}{L}
 \]
@@ -92,10 +90,7 @@ kd = 100;   % Derivative-like gain for heading error
 ---
 The controller:
 
-Computes linear velocity proportional to distance error
-Computes angular correction using heading error
-Limits maximum turning rate
-Includes special handling for sharp corners and transitions
+Computes linear velocity proportional to distance error Computes angular correction using heading error Limits maximum turning rate Includes special handling for sharp corners and transitions
 ---
 ▶️ How to Run
 Simply run the main script in MATLAB:
