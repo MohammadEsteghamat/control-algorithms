@@ -21,7 +21,13 @@ The animation of the robot movement and error plots are also generated.
 
 ## 🎥 Simulation Demo
 
-![Robot Simulation Demo]([demo.gif](https://github.com/MohammadEsteghamat/control-algorithms/blob/main/PID-Based%20Differential%20Drive%20Controller/Videos/squre.gif))
+---
+
+## 🎥 Simulation Demo
+
+![Differential Drive Robot Path Following](https://raw.githubusercontent.com/MohammadEsteghamat/control-algorithms/main/PID-Based%20Differential%20Drive%20Controller/Videos/squre.gif)
+
+---
 
 ---
 
