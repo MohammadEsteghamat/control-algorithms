@@ -17,6 +17,9 @@ The animation of the robot movement and error plots are also generated.
 * Error plotting for analysis
 
 ---
+## 🎥 Demo Video
+
+[Click here to watch the simulation video](https://github.com/USERNAME/REPO_NAME/blob/main/demo.mp4)
 
 ## 📁 Code Structure
 
