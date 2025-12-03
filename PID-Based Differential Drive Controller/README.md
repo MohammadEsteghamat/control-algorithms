@@ -58,23 +58,23 @@ Draws:
 
 ## 🧮 Robot Kinematics
 ```math
-\[v = \frac{v_r + v_l}{2}\]
+v = \frac{v_r + v_l}{2}
 ```
-\[
+```math
 \omega = \frac{v_r - v_l}{L}
-\]
+```
 
-\[
+```math
 x_{t+1} = x_t + v \cos(\theta) \, dt
-\]
+```
 
-\[
+```math
 y_{t+1} = y_t + v \sin(\theta) \, dt
-\]
+```
 
-\[
+```math
 \theta_{t+1} = \theta_t + \omega \, dt
-\]
+```
 
 ---
 
