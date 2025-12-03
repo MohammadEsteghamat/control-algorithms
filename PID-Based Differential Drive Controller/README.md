@@ -163,8 +163,9 @@ Enjoy the simulation! 🚙✨
 ---
 
 👨‍💻 Author
+
 Model Developer: [Mohammad Esteghamat]
 Feel free to reach out if you're interested in collaboration, development, or research use.
-
+---
 ⭐ If this project helped you…
 Consider starring the GitHub repository!
